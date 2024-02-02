@@ -2,8 +2,22 @@
     margin: 0;
 }
 
+body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
 table,
 th,
 td {
     border: 1px solid;
+}
+
+dialog {
+  margin: auto;
+}
+
+#modal {
+    align-self: center;
 }

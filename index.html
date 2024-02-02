@@ -8,6 +8,30 @@
     <title>Odin Library</title>
 </head>
 <body>
+    <dialog id="dialog">
+        <form>
+        <button aria-label="close" id="close" formnovalidate>X</button>
+        <h2>Add Book</h2>
+        <p>
+            <label>Title:
+               <input type="text" name="title" required />
+           </label>
+        </p>
+        <p>
+            <label>Author:
+                <input type="text" name="author" required>
+            <label>
+        </p>
+        <p>
+           <label>Page (Ch if WN) Count:
+              <input type="number" min="1" step=”1” name="pages" required />
+            </label>
+        </p>
+        <p>
+           <button type="submit">Submit</button>
+        </p>
+      </form>
+    </dialog>
     <table>
         <tr>
             <th>Title</th>
@@ -15,5 +39,6 @@
             <th>Number of Pages (Chapters if Web Novel)</th>
         </tr>
     </table>
+    <button id="modal">Add Book</button>
 </body>
 </html>

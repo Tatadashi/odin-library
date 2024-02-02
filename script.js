@@ -6,20 +6,11 @@ function Book(title, author, pages) {
   this.pages = pages;
 }
 
-//add book to array if inputs pass checks
+//add book to arra
 function addBookToLibrary(title, author, pages) {
-  //check if correct type input
-  if (typeof title === 'string' && typeof author === `string` && typeof pages === `number`) {
-    //check for blank strings
-    if (title !== `` && author !== ``) {
-      //check if number is positive integer
-      if (Number.isInteger(pages) && pages > 0) {
-        const book = new Book(title, author, pages);
-        myLibrary.push(book);
-        updateLibrary();
-      }
-    }
-  } 
+  const book = new Book(title, author, pages);
+  myLibrary.push(book);
+  updateLibrary();
 }
 
 //update visually display of library array
@@ -53,3 +44,34 @@ addBookToLibrary(`Everyone Else is a Returnee`, `Toika`, 378);
 addBookToLibrary(`Mushoku Tensei: Jobless Reincarnation, Vol. 1`, `Rifujin na Magonote`, 408);
 addBookToLibrary(`Lockwood & Co. The Screaming Staircase`, `Jonathan Stroud`, 440);
 addBookToLibrary(`League of Legends: Realms of Runeterra (Official Companion)`, `Riot Games`, 256);
+
+const dialog = document.getElementById(`dialog`);
+const modalButton = document.getElementById(`modal`)
+
+//add book button
+modalButton.addEventListener(`click`, () => {
+  dialog.showModal();
+});
+
+//submitting form
+const form = document.querySelector(`form`);
+form.addEventListener(`submit`, (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  const title = formData.get(`title`);
+  const author = formData.get(`author`);
+  const pages = formData.get(`pages`);
+
+  addBookToLibrary(title, author, Number(pages));
+  
+  form.reset();
+  dialog.close();
+});
+
+//x button on modal
+const closeModal = document.getElementById(`close`);
+closeModal.addEventListener(`click`, () => {
+  form.reset();
+  dialog.close();
+});
