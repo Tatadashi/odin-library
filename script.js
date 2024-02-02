@@ -25,6 +25,7 @@ function updateLibrary() {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
+      <td><button type="button" class="delete">Delete</button></td>
     </tr>`;
 
     const entries = document.querySelectorAll(`tr`);
@@ -32,6 +33,8 @@ function updateLibrary() {
     bookEntry.setAttribute(`index`, libraryIndex);
     libraryIndex++;
   });
+
+  setDeleteButtons()
 }
 
 
@@ -43,7 +46,20 @@ function resetLibary() {
   <th>Title</th>
   <th>Author</th>
   <th>Number of Pages (Chapters if Web Novel)</th>
+  <th>Delete Book</th>
   </tr>`;
+}
+
+//add functionality to delete buttons
+function setDeleteButtons() {
+  const buttons = document.querySelectorAll(`.delete`);
+  buttons.forEach(button => {
+    button.addEventListener(`click`, () => {
+      const index = button.parentElement.parentElement.getAttribute(`index`)
+      myLibrary.splice(index, 1);
+      updateLibrary();
+    });
+  });
 }
 
 addBookToLibrary(`Solo Leveling, Vol. 1`, `Chugong`, 322);
