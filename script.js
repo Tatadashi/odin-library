@@ -4,6 +4,7 @@ function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.read = false;
 }
 
 //add book to arra
@@ -25,16 +26,24 @@ function updateLibrary() {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
+      <td><button type="button" class="toggle">Toggle</button></td>
       <td><button type="button" class="delete">Delete</button></td>
     </tr>`;
 
     const entries = document.querySelectorAll(`tr`);
     const bookEntry = entries[entries.length - 1];
     bookEntry.setAttribute(`index`, libraryIndex);
+
+    if (book.read) {
+      bookEntry.style.cssText = `background-color: rgb(55, 242, 136)`;
+    } else {
+      bookEntry.style.cssText = `background-color: rgb(236, 117, 108)`;
+    }
+
     libraryIndex++;
   });
 
-  setDeleteButtons()
+  setButtons()
 }
 
 
@@ -46,17 +55,27 @@ function resetLibary() {
   <th>Title</th>
   <th>Author</th>
   <th>Number of Pages (Chapters if Web Novel)</th>
+  <th>Toggle Read</th>
   <th>Delete Book</th>
   </tr>`;
 }
 
-//add functionality to delete buttons
-function setDeleteButtons() {
-  const buttons = document.querySelectorAll(`.delete`);
-  buttons.forEach(button => {
+//add functionality to buttons
+function setButtons() {
+  const deletes = document.querySelectorAll(`.delete`);
+  deletes.forEach(button => {
     button.addEventListener(`click`, () => {
       const index = button.parentElement.parentElement.getAttribute(`index`)
       myLibrary.splice(index, 1);
+      updateLibrary();
+    });
+  });
+
+  const toggles = document.querySelectorAll(`.toggle`);
+  toggles.forEach(button => {
+    button.addEventListener(`click`, () => {
+      const index = button.parentElement.parentElement.getAttribute(`index`)
+      myLibrary[index].toggleRead();
       updateLibrary();
     });
   });
@@ -97,3 +116,7 @@ const closeModal = document.getElementById(`close`);
 closeModal.addEventListener(`click`, () => {
   dialog.close();
 });
+
+Book.prototype.toggleRead = function() {
+  this.read = !this.read;
+};
