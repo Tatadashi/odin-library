@@ -64,9 +64,14 @@ form.addEventListener(`submit`, (e) => {
   const pages = formData.get(`pages`);
 
   addBookToLibrary(title, author, Number(pages));
-  
+
   form.reset();
   dialog.close();
+});
+
+//esc to close modal
+form.addEventListener(`keydown`, () => {
+  form.reset();
 });
 
 //x button on modal
