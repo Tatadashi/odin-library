@@ -17,6 +17,8 @@ function addBookToLibrary(title, author, pages) {
 function updateLibrary() {
   const table = document.querySelector(`table`);
   resetLibary();
+
+  let libraryIndex = 0;
   myLibrary.forEach(book => {
     table.innerHTML +=
     `<tr>
@@ -24,6 +26,11 @@ function updateLibrary() {
       <td>${book.author}</td>
       <td>${book.pages}</td>
     </tr>`;
+
+    const entries = document.querySelectorAll(`tr`);
+    const bookEntry = entries[entries.length - 1];
+    bookEntry.setAttribute(`index`, libraryIndex);
+    libraryIndex++;
   });
 }
 
@@ -51,6 +58,7 @@ const modalButton = document.getElementById(`modal`)
 //add book button
 modalButton.addEventListener(`click`, () => {
   dialog.showModal();
+  form.reset();
 });
 
 //submitting form
@@ -65,18 +73,11 @@ form.addEventListener(`submit`, (e) => {
 
   addBookToLibrary(title, author, Number(pages));
 
-  form.reset();
   dialog.close();
-});
-
-//esc to close modal
-form.addEventListener(`keydown`, () => {
-  form.reset();
 });
 
 //x button on modal
 const closeModal = document.getElementById(`close`);
 closeModal.addEventListener(`click`, () => {
-  form.reset();
   dialog.close();
 });
