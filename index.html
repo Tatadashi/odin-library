@@ -14,17 +14,17 @@
         <h2>Add Book</h2>
         <p>
             <label>Title:
-               <input type="text" name="title" required />
+               <input type="text" name="title" maxlength="100" required/>
            </label>
         </p>
         <p>
             <label>Author:
-                <input type="text" name="author" required>
+                <input type="text" name="author" minlength="1" maxlength="100"required>
             <label>
         </p>
         <p>
            <label>Page (Ch if WN) Count:
-              <input type="number" min="1" step=”1” name="pages" required />
+              <input type="number" min="1" max="10000" step=”1” name="pages" required />
             </label>
         </p>
         <p>
